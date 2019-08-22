@@ -2,6 +2,10 @@ var Calculadora = {
   init: function(){
     this.reducirBtn.ejecutar();
     this.aumentarBtn()
+    this.sumar()
+    this.restar()
+    this.multiplicar()
+    this.dividir()
   },
   reducirBtn: {
     botones: document.getElementsByClassName('tecla'),
@@ -9,7 +13,11 @@ var Calculadora = {
       for(let i=0; i<this.botones.length; i++){
         this.botones[i].onclick = function(e){
           e.target.style.transform = "scale(.95,.95)"
-          Calculadora.digitarNumeros(e.target)
+          if(document.getElementById('display').textContent.length < 8){
+            Calculadora.digitarNumeros(e.target)
+          }else if (document.getElementById('display').textContent.length == 8 && e.target.id == 'on') {
+            Calculadora.digitarNumeros(e.target)
+          }
         }
       }
     }
@@ -26,7 +34,6 @@ var Calculadora = {
   },
   digitarNumeros: function(boton){
     var digito = boton.id
-    var num1, num2, operacion
     var valorPantalla = document.getElementById("display").textContent
     var pantalla = document.getElementById("display")
     if(valorPantalla == '0'){
@@ -34,94 +41,68 @@ var Calculadora = {
         pantalla.innerHTML = '0'
       }else if (digito == 'on') {
         pantalla.innerHTML = '0'
-      }else if (digito == 'mas') {
-        num1 = valorPantalla
-        pantalla.innerHTML = '0'
-        operacion = btn
-      }else if (digito == 'menos') {
-        num1 = valorPantalla
-        pantalla.innerHTML = '0'
-        operacion = digito
-      }else if (digito == 'por') {
-        num1 = valorPantalla
-        pantalla.innerHTML = '0'
-        operacion = digito
-      }else if (digito == 'dividido') {
-        num1 = valorPantalla
-        pantalla.innerHTML = '0'
-        operacion = digito
-      }else if (digito == 'igual') {
-        num2 = valorPantalla
-        switch (operacion) {
-          case 'mas':
-
-            break;
-          case 'menos':
-
-            break;
-          case 'por':
-
-            break;
-          case 'dividido':
-
-            break;
-          default:
-            alert("No se ha realizado ninguna operación")
-        }
       }else if (digito == 'punto') {
         pantalla.innerHTML += '.'
-      }else if (digito == 'raiz') {
-
-      }else if (digito == 'sing') {
-
       }else {
-        pantalla.innerHTML = digito
+        if(digito != 'mas' && digito != 'menos' && digito != 'por' && digito != 'dividido' && digito != 'sing' && digito != 'raiz' && digito != 'igual'){
+          pantalla.innerHTML = digito
+        }
       }
     }else {
       if (digito == 'on') {
         pantalla.innerHTML = '0'
-      }else if (digito == 'mas') {
-        num1 = valorPantalla
-        pantalla.innerHTML = '0'
-        operacion = digito
-      }else if (digito == 'menos') {
-        num1 = valorPantalla
-        pantalla.innerHTML = '0'
-        operacion = digito
-      }else if (digito == 'por') {
-        num1 = valorPantalla
-        pantalla.innerHTML = '0'
-        operacion = digito
-      }else if (digito == 'dividido') {
-        num1 = valorPantalla
-        pantalla.innerHTML = '0'
-        operacion = digito
-      }else if (digito == 'igual') {
-        num2 = valorPantalla
-        switch (operacion) {
-          case 'mas':
-
-            break;
-          case 'menos':
-
-            break;
-          case 'por':
-
-            break;
-          case 'dividido':
-
-            break;
-          default:
-            alert("No se ha realizado ninguna operación")
-        }
       }else if (digito == 'punto') {
         pantalla.innerHTML += '.'
-      }else if (digito == 'sing') {
-
       }else {
-        pantalla.innerHTML += digito
+        if(digito != 'mas' && digito != 'menos' && digito != 'por' && digito != 'dividido' && digito != 'sing' && digito != 'raiz' && digito != 'igual'){
+          pantalla.innerHTML += digito
+        }
       }
     }
+  },
+  sumar: function(){
+    document.getElementById('mas').addEventListener('click', function(){
+      var valor1 = document.getElementById('display').textContent
+      document.getElementById('display').innerHTML = '0'
+      document.getElementById('igual').onclick = function(e){
+        var valor2 = document.getElementById('display').textContent
+          var resultado = parseFloat(valor1) + parseFloat(valor2)
+          document.getElementById('display').innerHTML = resultado
+      }
+    })
+  },
+  restar: function(){
+    document.getElementById('menos').addEventListener('click', function(){
+      var valor1 = document.getElementById('display').textContent
+      document.getElementById('display').innerHTML = '0'
+      document.getElementById('igual').onclick = function(e){
+        var valor2 = document.getElementById('display').textContent
+          var resultado = parseFloat(valor1) - parseFloat(valor2)
+          document.getElementById('display').innerHTML = resultado
+      }
+    })
+  },
+  multiplicar: function(){
+    document.getElementById('por').addEventListener('click', function(){
+      var valor1 = document.getElementById('display').textContent
+      document.getElementById('display').innerHTML = '0'
+      document.getElementById('igual').onclick = function(e){
+        var valor2 = document.getElementById('display').textContent
+          var resultado = parseFloat(valor1) * parseFloat(valor2)
+          document.getElementById('display').innerHTML = resultado
+      }
+    })
+  },
+  dividir: function(){
+    document.getElementById('dividido').addEventListener('click', function(){
+      var valor1 = document.getElementById('display').textContent
+      document.getElementById('display').innerHTML = '0'
+      document.getElementById('igual').onclick = function(e){
+        var valor2 = document.getElementById('display').textContent
+          var resultado = parseFloat(valor1) / parseFloat(valor2)
+          document.getElementById('display').innerHTML = resultado
+      }
+    })
   }
 }
 
