@@ -17,7 +17,7 @@ var Calculadora = {
           e.target.style.transform = "scale(.95,.95)"
           if(document.getElementById('display').textContent.length < 8){
             Calculadora.digitarNumeros(e.target)
-          }else if (document.getElementById('display').textContent.length == 8 && e.target.id == 'on') {
+          }else if (document.getElementById('display').textContent.length >= 8 && e.target.id == 'on') {
             Calculadora.digitarNumeros(e.target)
           }
         }
@@ -44,8 +44,8 @@ var Calculadora = {
       }else if (digito == 'on') {
         pantalla.innerHTML = '0'
       }else if (digito == 'punto') {
-        for(let i=1; i<=valorPantalla.length; i++){
-          var validar = valorPantalla.charAt(valorPantalla.length-i)
+        for(let i=0; i<valorPantalla.length; i++){
+          var validar = valorPantalla.charAt(i)
           if(validar == '.')
           {
             validarPunto = true
@@ -67,8 +67,8 @@ var Calculadora = {
       if (digito == 'on') {
         pantalla.innerHTML = '0'
       }else if (digito == 'punto') {
-        for(let i=1; i<=valorPantalla.length; i++){
-          var validar = valorPantalla.charAt(valorPantalla.length-i)
+        for(let i=0; i<valorPantalla.length; i++){
+          var validar = valorPantalla.charAt(i)
           if(validar == '.')
           {
             validarPunto = true
@@ -91,12 +91,17 @@ var Calculadora = {
   sumar: function(){
     document.getElementById('mas').addEventListener('click', function(){
       var valor1 = document.getElementById('display').textContent
-      document.getElementById('display').innerHTML = '0'
+      document.getElementById('display').innerHTML = ''
       document.getElementById('igual').onclick = function(e){
         var valor2 = document.getElementById('display').textContent
           var resultado = parseFloat(valor1) + parseFloat(valor2)
           if(resultado.toString().length >= 8){
-            document.getElementById('display').innerHTML = "INF"
+            var resOperacion = ''
+            for(let i=0; i<8; i++){
+              var num = resultado.toString().charAt(i)
+              resOperacion += num
+            }
+            document.getElementById('display').innerHTML = resOperacion
           }else {
             document.getElementById('display').innerHTML = resultado
           }
@@ -106,12 +111,17 @@ var Calculadora = {
   restar: function(){
     document.getElementById('menos').addEventListener('click', function(){
       var valor1 = document.getElementById('display').textContent
-      document.getElementById('display').innerHTML = '0'
+      document.getElementById('display').innerHTML = ''
       document.getElementById('igual').onclick = function(e){
         var valor2 = document.getElementById('display').textContent
           var resultado = parseFloat(valor1) - parseFloat(valor2)
           if(resultado.toString().length >= 8){
-            document.getElementById('display').innerHTML = "INF"
+            var resOperacion = ''
+            for(let i=0; i<8; i++){
+              var num = resultado.toString().charAt(i)
+              resOperacion += num
+            }
+            document.getElementById('display').innerHTML = resOperacion
           }else {
             document.getElementById('display').innerHTML = resultado
           }
@@ -121,12 +131,17 @@ var Calculadora = {
   multiplicar: function(){
     document.getElementById('por').addEventListener('click', function(){
       var valor1 = document.getElementById('display').textContent
-      document.getElementById('display').innerHTML = '0'
+      document.getElementById('display').innerHTML = ''
       document.getElementById('igual').onclick = function(e){
         var valor2 = document.getElementById('display').textContent
           var resultado = parseFloat(valor1) * parseFloat(valor2)
           if(resultado.toString().length >= 8){
-            document.getElementById('display').innerHTML = "INF"
+            var resOperacion = ''
+            for(let i=0; i<8; i++){
+              var num = resultado.toString().charAt(i)
+              resOperacion += num
+            }
+            document.getElementById('display').innerHTML = resOperacion
           }else {
             document.getElementById('display').innerHTML = resultado
           }
@@ -136,12 +151,17 @@ var Calculadora = {
   dividir: function(){
     document.getElementById('dividido').addEventListener('click', function(){
       var valor1 = document.getElementById('display').textContent
-      document.getElementById('display').innerHTML = '0'
+      document.getElementById('display').innerHTML = ''
       document.getElementById('igual').onclick = function(e){
         var valor2 = document.getElementById('display').textContent
           var resultado = parseFloat(valor1) / parseFloat(valor2)
           if(resultado.toString().length >= 8){
-            document.getElementById('display').innerHTML = "INF"
+            var resOperacion = ''
+            for(let i=0; i<8; i++){
+              var num = resultado.toString().charAt(i)
+              resOperacion += num
+            }
+            document.getElementById('display').innerHTML = resOperacion
           }else {
             document.getElementById('display').innerHTML = resultado
           }
